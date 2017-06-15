@@ -1,0 +1,21 @@
+<html lang="en" ng-app="myApp">
+<head>
+    <link rel="stylesheet" type="text/css" href="css/main.css"/>
+    <!-- standard libraries -->
+    <script src="js/angular.js"></script>
+    <script src="js/jquery.js"></script>
+    <script src="js/socket-io.js"></script>
+    <!-- end of standard libraries -->
+    <script src="js/client.js"></script>
+</head>
+
+<body ng-controller="main">
+    <canvas id="canvas" tabindex="1"></canvas>
+    <div class="overlay">
+        <div class="input-console">
+            <input ng-model="input" ng-keydown="($event.keyCode == 13) ? send_command() : 0" type="text" placeholder="enter command> " class="ng-scope ng-pristine ng-valid"></input>
+        </div>
+    </div>
+</body>
+
+</html>
