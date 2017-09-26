@@ -28,6 +28,7 @@ var config = {
     fps : 60,
 }
 
+
 var Server = function() {
 
     io.on("connect", function(socket) {
