@@ -26,8 +26,8 @@ var world = {
 var config = {
     speed : 10,
     fps : 60,
+	port : 5000,
 }
-
 
 var Server = function() {
 
@@ -111,7 +111,8 @@ var Server = function() {
 
         init();
     });
-    server.listen(5000);
+	console.log("Server started on port", config.port);
+    server.listen(config.port);
 }
 
 server = new Server();

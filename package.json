@@ -1,0 +1,12 @@
+{
+  "name": "node-multiplayer-game",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-session": "^1.17.2",
+    "jsonfile": "^6.1.0",
+    "socketio": "^1.0.0"
+  }
+}
