@@ -4,6 +4,10 @@
 
 var app = angular.module('myApp', []);
 
+var lerp = function(v0, v1, t) {
+	return (1.0 - t) * v0 + t * v1;
+}
+
 app.controller("main", function($scope) {
     $scope.socket = io.connect();
     $scope.canvas = document.getElementById("canvas");
@@ -45,6 +49,8 @@ app.controller("main", function($scope) {
         $scope.ctx.clearRect(0, 0, $scope.canvas.width, $scope.canvas.height);
         for (var i in $scope.world.entities) {
             var entity = $scope.world.entities[i];
+			entity.pos[0] = lerp(entity.pos[0], entity.target_pos[0], 0.5);
+			entity.pos[1] = lerp(entity.pos[1], entity.target_pos[1], 0.5);
             $scope.ctx.font = "12px monospace";
             $scope.ctx.strokeText(entity.name, entity.pos[0] - (entity.name.length), entity.pos[1] - 18);
             $scope.ctx.fillStyle = entity.color;
@@ -80,9 +86,9 @@ app.controller("main", function($scope) {
         $scope.world.entities = data;
     });
 
-    /* move: {id : Int, x : Int, y : Int}*/
+    /* move: {id : Int, x : Int, y : Int} */
     $scope.socket.on("move", function(data) {
-        $scope.world.entities[data.id].pos = data.pos;
+        $scope.world.entities[data.id].target_pos = data.target_pos;
     });
 
     $scope.main = function() {

@@ -32,12 +32,14 @@ var config = {
 var Server = function() {
 
     io.on("connect", function(socket) {
+		var position = [
+			Math.round(Math.random() * 300),
+			Math.round(Math.random() * 200)
+		];
         var client = {
             id : world.users_peeked,
-            pos : [
-                Math.round(Math.random() * 300),
-                Math.round(Math.random() * 200)
-            ],
+            pos : position,
+			target_pos : position,
             w : 40,
             h : 40,
             speed : [0, 0],
@@ -95,18 +97,18 @@ var Server = function() {
 
         socket.on("input", function(data) {
             if (data[65]) {     /* A */
-                world.entities[client.id].pos[0] -= config.speed;
+                world.entities[client.id].target_pos[0] -= config.speed;
             }
             if (data[68]) {     /* D */
-                world.entities[client.id].pos[0] += config.speed;
+                world.entities[client.id].target_pos[0] += config.speed;
             }
             if (data[87]) {     /* W */
-                world.entities[client.id].pos[1] -= config.speed;
+                world.entities[client.id].target_pos[1] -= config.speed;
             }
             if (data[83]) {     /* S */
-                world.entities[client.id].pos[1] += config.speed;
+                world.entities[client.id].target_pos[1] += config.speed;
             }
-            io.sockets.emit("move", {id : client.id, pos : world.entities[client.id].pos});
+            io.sockets.emit("move", {id : client.id, target_pos : world.entities[client.id].target_pos});
         });
 
         init();
