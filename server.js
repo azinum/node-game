@@ -9,7 +9,6 @@ var app = express();
 var server = Server(app);
 var io = require("socket.io")(server);
 var fs = require("fs");
-var json = require("jsonfile");
 
 app.use(express.static(__dirname + "/static"));
 
